@@ -1,8 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
-from passlib.hash import sha256_crypt
 
 db = SQLAlchemy()
 
@@ -21,17 +20,12 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
 
     memos = relationship('Memo', back_populates='user')
 
     def set_password(self, password):
-        hashed_password = sha256_crypt.hash(password)
-        truncated_password = hashed_password[:120]
-        self.password = truncated_password
+        self.password = generate_password_hash(password)
 
     def check_password(self, password):
-        hashed_password = sha256_crypt.hash(password)
-        truncated_password = hashed_password[:120]
-        self.password = truncated_password
         return check_password_hash(self.password, password)
