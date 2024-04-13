@@ -25,7 +25,9 @@ class User(UserMixin, db.Model):
     memos = relationship('Memo', back_populates='user')
 
     def set_password(self, password):
-        self.password = generate_password_hash(password, salt_length=8)
+        hashed_password = generate_password_hash(password)
+        truncated_password = hashed_password[:100]
+        self.password = truncated_password
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
