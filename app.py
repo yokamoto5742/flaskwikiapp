@@ -8,6 +8,7 @@ from wiki.views import wiki_bp
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
+
 db.init_app(app)
 migrate = Migrate(app, db)
 
