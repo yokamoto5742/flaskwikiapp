@@ -1,2 +1,2 @@
-release: flask db upgrade --no-input
+release: flask db upgrade
 web: gunicorn app:app --log-file=-
