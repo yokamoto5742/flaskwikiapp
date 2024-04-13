@@ -31,4 +31,7 @@ class User(UserMixin, db.Model):
         self.password = truncated_password
 
     def check_password(self, password):
+        hashed_password = sha256_crypt.hash(password)
+        truncated_password = hashed_password[:120]
+        self.password = truncated_password
         return check_password_hash(self.password, password)
