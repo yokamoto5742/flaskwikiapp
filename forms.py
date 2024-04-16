@@ -25,7 +25,7 @@ class LoginForm(FlaskForm):
                            validators=[DataRequired('ユーザー名は必須入力です')])
     password = PasswordField('パスワード:',
                              validators=[DataRequired('パスワードは必須入力です'),
-                                         Length(4, 10,
+                                         Length(4, 8,
                                                 message='パスワードは4文字以上10文字以内で入力してください')])
 
     submit = SubmitField('ログイン')

@@ -2,5 +2,5 @@ SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{password}@{host}/{name}
     'user': 'postgres',
     'password': 'postgres',
     'host': 'localhost',
-    'name': 'memodb.db'
+    'name': 'flaskapp'  # 事前に作成したデータベース名
 })
