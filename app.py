@@ -16,6 +16,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_message = '認証していません:ログインしてください'
 login_manager.login_view = 'auth.login'
+
 app.register_blueprint(auth_bp)
 app.register_blueprint(memo_bp)
 app.register_blueprint(wiki_bp)
@@ -25,8 +26,6 @@ app.register_blueprint(wiki_bp)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-from views import *
 
 if __name__ == '__main__':
     app.run(debug=True)
